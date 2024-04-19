@@ -271,6 +271,35 @@ squeue_ -j $SLURM_JOBID
 Libérer les ressources allouées par slurm
 > Ctrl+d  OR  exit
 
+Soumettre quelques commandes simples avec srun depuis le nœud de login avec l’utilisateur bench1
+```
+srun --nodes=1 --ntasks=2 --time=00:01:00 --partition=short hostname
+srun --nodes=2 --ntasks=2 --time=00:01:00 --partition=short hostname
+srun --nodes=3 --ntasks=3 --time=00:01:00 --partition=short hostname
+```
+Pourquoi cette dernière commande ne passe pas ?
+
+Soumettre les commandes suivantes et consulter le statut des jobs avec l’aias squeue_
+```
+sbatch -A eqb --qos=padawan -N 1 -n 1 --wrap="hostname ; sleep 1m"
+```
+puis
+```
+for i in {1..3}
+do
+  sbatch -A eqb --qos=padawan -N 1 -n 1 --wrap="hostname ; sleep 30s"
+done
+```
+Pourquoi le message d’erreur QOSMaxSubmitJobPerUserLimit après quelques soumissions ?
+Utiliser `scancel <jobid>` si besoin.
+
+Tester différents paramétrages :
+```
+srun -A bench1 --qos=padawan -N 2 -n 4 --cpus-per-task=1 hostname
+srun -A eqa --qos=jedi -N 2 -n 4  hostname
+srun -A eqa --qos=jedi -N 3 -n 3 -p exclusive --cpus-per-task=1 hostname
+srun -A chef --qos=normal -N 3 -n 3 -p exclusive --cpus-per-task=1 hostname
+```
 
 
 
