@@ -4,7 +4,8 @@
 <br/><br/>
 <h2>Généralités</h2>
 
-Vous avez 3 alias définis dans votre environnement et utilisable pendant les TP :
+Vous avez 3 alias définis dans votre environnement et utilisable pendant les TP.
+Ceux-ci permettent l'utilisation d'un format de sortie personnalisé pour chaque commande.
 ```
 alias sacct_='\sacct -D --format=jobid%-13,user%-12,jobname%-35,submit,timelimit,partition,qos,nnodes,start,end,elapsed,state,exitcode%-6,Derivedexitcode%-6,nodelist%-200 '
 alias sinfo_='\sinfo --format="%100E %12U %19H %6t %N" '
