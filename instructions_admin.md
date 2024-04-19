@@ -85,3 +85,31 @@ podman exec --interactive --user bench1 --tty login bash
 [bench1@login ~]$
 ```
 
+Compléter les différents fichiers de configuration slurm avec les valeurs adéquates (mot clef A_REMPLACER)
+```
+/etc/slurm/slurm.conf      # configuration générale
+/etc/slurm/slurmdbd.conf   # base de données
+/etc/slurm/partition.conf  # nœuds et partitions
+```
+
+Rechercher les termes à compléter
+```
+[root@slurm /]# grep A_REMPLACER /etc/slurm/*.conf
+scontrol show config
+```
+
+Aidez-vous :
+```
+du contenu du fichier podman-compose.yml    # description mariadb et users
+de la commande lscpu                        # configuration CPU des nœuds de calcul
+de la commande free –m                      # configuration mémoire
+```
+
+Une fois terminé vous devez voir les nœuds apparaître avec le statut idle
+```
+[root@slurm /]# sinfo
+PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+short*       up    1:00:00      2   idle c[1-2]
+long         up   infinite      2   idle c[2-3]
+```
+
