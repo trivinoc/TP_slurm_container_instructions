@@ -98,6 +98,13 @@ podman exec --interactive --user bench1 --tty login bash
 <br/><br/>
 <h2>4. Configuration du cluster</h2>
 
+Vérifier quel service s'exécute sur quel conteneur
+```
+Consulter le fichier podman-compose.yml
+Consulter les fichiers de log slurm dans /var/log/slurm
+ps auxwwf 
+```
+
 Compléter les différents fichiers de configuration slurm avec les valeurs adéquates (mot clef A_REMPLACER)
 ```
 /etc/slurm/slurm.conf      # configuration générale
