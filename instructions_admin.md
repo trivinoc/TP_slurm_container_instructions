@@ -1,6 +1,7 @@
 
 <h1>Instructions TP slurm administrateur</h1>
 
+<br/><br/>
 <h2>Généralités</h2>
 
 Vous avez 3 alias définis dans votre environnement et utilisable pendant les TP :
@@ -22,6 +23,7 @@ Ctrl+b then n  et Ctrl+b then p    # fenêtre suivante et fenêtre précédent
 Ctrl+b then d                      # se détacher de la session tmux
 ```
 
+<br/><br/>
 <h2>Administration du cluster slurm</h2>
 
 La VM contenant les TP est hébergée chez le fournisseur OVH et est accessible par ssh avec le login almalinux. Le mot de passe vous sera communiqué en séance. Exemple de connexion : 
@@ -51,6 +53,7 @@ Il est possible de se connecter indépendamment sur chaque conteneur.
 
 Si vous opérez des modifications dans la configuration slurm, privilégier un RESTART pour la prise en compte des modifications (redémarrage de tous les services).
 
+<br/><br/>
 <h2>Connexion au cluster</h2>
 
 3 utilisateurs sont disponibles pour se connecter au cluster :
@@ -90,6 +93,7 @@ podman exec --interactive --user bench1 --tty login bash
 [bench1@login ~]$
 ```
 
+<br/><br/>
 <h2>Configuration du cluster</h2>
 
 Compléter les différents fichiers de configuration slurm avec les valeurs adéquates (mot clef A_REMPLACER)
@@ -143,6 +147,7 @@ Vérifier dans quelle partition un nœud est associé
 sinfo -n c1
 ```
 
+<br/><br/>
 <h2>Les partitions et accounts</h2>
 
 Créer une nouvelle partition avec 2 nœuds et autoriser l'utilisation uniquement au groupe unix bench1 (attention de reporter la partition dans les fichiers de configuration si vous souhaitez qu’elle soit persistante)
@@ -255,6 +260,7 @@ sacctmgr create qos qostp
 sacctmgr delete qos qostp
 ```
 
+<br/><br/>
 <h2>Commandes d'allocation et de soumission de jobs</h2>
 
 Utiliser salloc pour obtenir une allocation de ressources de slurm
@@ -312,6 +318,7 @@ srun -A eqa --qos=jedi -N 3 -n 3 -p exclusive --cpus-per-task=1 hostname
 srun -A chef --qos=normal -N 3 -n 3 -p exclusive --cpus-per-task=1 hostname
 ```
 
+<br/><br/>
 <h2>Réservations</h2>
 
 Créer dès maintenant une réservation d'une durée de 3 heures avec votre nodeset et pour l'utilisateur bench2 uniquement
@@ -367,6 +374,7 @@ Obtenir les jobs qui ont été exécutés sur 2 nœuds au cours du mois d’avri
 sacct_ -X -S 2024-04-01T00:00:01  -E 2024-04-30T23:59:59 --nnodes=2
 ```
 
+<br/><br/>
 <h2>Activer le Node Health Check (NHC)</h2>
 
 Vérifiez le status des noeuds 
@@ -399,6 +407,7 @@ Et pour une sortie plus verbeuse (debug) :
 [root@c1 /]# nhc –d
 ```
 
+<br/><br/>
 <h2>Activer l'utilisation des scripts epilog/prolog</h2>
 
 Ajouter un script de prologue afin de
@@ -416,6 +425,7 @@ sbatch job.slurm
 ```
 Analyser le fichier de sortie.
 
+<br/><br/>
 <h2>Tests additionnels MPI - hello world & NPB</h2>
 
 Placez-vous dans le répertoire `TP_hello_world_mpi`. Compiler et lancer le job
