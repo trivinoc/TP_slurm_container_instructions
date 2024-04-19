@@ -192,3 +192,32 @@ sacctmgr -i delete account bench1
 sacctmgr show assoc
 ```
 
+Vérifier la configuration qos actuelle
+```
+sacctmgr  show qos
+```
+
+Créer deux qos avec des limitations différentes
+```
+sacctmgr create qos padawan Priority=100 MaxJobs=1 MaxSubmit=2 MaxTRES=cpu=2
+sacctmgr create qos jedi Priority=10000 MaxJobs=4 MaxSubmit=8 MaxTRES=cpu=8
+sacctmgr  show qos
+```
+
+Créer deux accounts génériques avec une qos par défaut associée
+```
+sacctmgr create account name=eqa set qos=jedi
+sacctmgr create account name=eqb set qos=padawan
+sacctmgr show assoc
+```
+
+Associer les utilisateurs bench1 et bench2 aux deux accounts créés ci-dessus
+```
+sacctmgr  create user name=bench1 account=eqa
+sacctmgr  create user name=bench1 account=eqb
+sacctmgr  create user name=bench2 account=eqb
+sacctmgr show assoc
+```
+
+
+
