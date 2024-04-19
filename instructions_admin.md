@@ -65,3 +65,23 @@ Options:
   -u, --user           Nom de l'utilisateur (facultatif: par défaut root)
 ```
 
+Par exemple pour se connecter avec root au conteneur de management slurm :
+```
+[almalinux@admin-1 TP_slurm_utilisateur]$ ./connect.sh -n slurm
+podman-compose version: 1.0.6
+['podman', '--version', '']
+using podman version: 4.6.1
+podman exec --interactive --tty slurm bash
+[root@slurm /]#
+```
+
+Pour se connecter avec l’utilisateur bench1 au noeud de login :
+```
+[almalinux@admin-1 TP_slurm_utilisateur]$ ./connect.sh -n login -u bench1
+podman-compose version: 1.0.6
+['podman', '--version', '']
+using podman version: 4.6.1
+podman exec --interactive --user bench1 --tty login bash
+[bench1@login ~]$
+```
+
