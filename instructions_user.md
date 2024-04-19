@@ -1,6 +1,6 @@
 
 
-<h1>TP slurm - Instructions administrateur</h1>
+<h1>TP slurm - Instructions utilisateur</h1>
 
 <br/><br/>
 <h2>1. Généralités</h2>
@@ -191,31 +191,12 @@ sacctmgr  show assoc
 sacctmgr  show assoc where user=bench1
 ```
 
-Maitenant, consulter les configurations des QOS (Quality Of Service). Observee les différentes limitations positionnées. Consulter le manpage si necessaire `man sacctmgr`
+Maitenant, consulter les configurations des QOS (Quality Of Service). Observer les différentes limitations positionnées. Consulter le manpage si necessaire `man sacctmgr`
 ```
 sacctmgr show qos
 ```
 
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-
-
-
-
-Soumettre quelques commandes simples avec srun depuis le nœud de login avec l’utilisateur bench1
-```
-srun --nodes=1 --ntasks=2 --time=00:01:00 --partition=short hostname
-srun --nodes=2 --ntasks=2 --time=00:01:00 --partition=short hostname
-srun --nodes=3 --ntasks=3 --time=00:01:00 --partition=short hostname
-```
-Pourquoi cette dernière commande ne passe pas ?
-
-Soumettre les commandes suivantes et consulter le statut des jobs avec l’aias squeue_
+Soumettre les commandes suivantes et consulter le statut des jobs avec l’alias squeue_
 ```
 sbatch -A eqb --qos=padawan -N 1 -n 1 --wrap="hostname ; sleep 1m"
 ```
@@ -236,35 +217,6 @@ srun -A bench1 --qos=padawan -N 2 -n 4 --cpus-per-task=1 hostname
 srun -A eqa --qos=jedi -N 2 -n 4  hostname
 srun -A eqa --qos=jedi -N 3 -n 3 -p exclusive --cpus-per-task=1 hostname
 srun -A chef --qos=normal -N 3 -n 3 -p exclusive --cpus-per-task=1 hostname
-```
-
-<br/><br/>
-<h2>7. Réservations</h2>
-
-Créer dès maintenant une réservation d'une durée de 3 heures avec votre nodeset et pour l'utilisateur bench2 uniquement
-```
-scontrol  create reservation=pasteur nodes=c3 user=bench1 start=now duration=03:00:00
-```
-
-Vérifier la reservation
-```
-sinfo -T
-scontrol show reservation=pasteur
-```
-
-Mettre la réservation à jour afin d’ajouter le flag DAILY (la réservation sera répétée tous les jours à la même heure). Vérifier à nouveau la réservation
-```
-scontrol  update reservation=pasteur Flags+=DAILY
-```
-
-Soumettre un job dans la reservation en tant qu’utilisateur bench1
-```
-srun -p long --ntasks=4 --reservation=pasteur hostname
-```
-
-Supprimer la réservation
-```
-scontrol delete reservation=pasteur
 ```
 
 <br/><br/>
@@ -296,61 +248,39 @@ sacct_ -X -S 2024-04-01T00:00:01  -E 2024-04-30T23:59:59 --nnodes=2
 ```
 
 <br/><br/>
-<h2>9. Modifier le statut des noeuds dans slurm</h2>
+<h2>9. Utilisation d'un répertoire temporaire</h2>
 
-Vérifiez le status des noeuds 
-```
-sinfo -n c[1-3]
-sinfo -R -n c[1-3]
-```
-
-Modifier le statut des noeuds dans slurm 
-```
-scontrol  update state=drain node=c[1-2] reason="redemarrage requis"
-sinfo_ -R 
-scontrol  update state=idle node=c[1-2]
-```
-
-<br/><br/>
-<h2>10. Activer le Node Health Check (NHC)</h2>
-
-Activer nhc dans la configuration slurm
-```
-grep –i HealthCheck /etc/slurm/slurm.conf
-```
-Ajouter quelques règles de contrôle nhc (fichier de configuration `/etc/nhc/nhc.conf`)
-Voir le lien (https://github.com/mej/nhc#installation)
-> * || check_hw_physmem XXgb XXgb 5%
-> * || check_hw_cpuinfo 4 X X
-
-
-Run nhc explicitly. Connectez vous sur le noeud c1 en root et exécuter :
-```
-[root@c1 /]# nhc –v
-```
-Puis consulter la fin du fichier `/var/log/nhc.log`
-Et pour une sortie plus verbeuse (debug) :
-```
-[root@c1 /]# nhc –d
-```
-
-<br/><br/>
-<h2>11. Activer l'utilisation des scripts epilog/prolog</h2>
-
-Ajouter un script de prologue afin de
- - créer un répertoire temporaire pour chaque job dans l’espace de travail partagé /workdir : `/workdir/$SLURM_USER.$SLURM_JOBID`
- - positionner les droits d’accès et owner du répertoire créé
-
-Ajouter un script d’epilog afin de
- - supprimer le répertoire temporaire du job et son contenu (l’utilisateur doit copier les données qu’il souhaite conserver à la fin du job).
- - synchroniser les écritures en cache sur le stockage `sync`
-
-Lancer un job utilisateur afin de vérifier la présence de la variable d’environnement et l’existence du répertoire temporaire
-Pour cela, placez-vous dans le répertoire `/home/bench1/TP_tmpdir` de l’utilisateur bench1. Consulter le fichier et lancer le job.
+Il s'agit d'un cas test utilisant un répertoire créé temporairement par un script de prolog slurm ajouté par l'administrateur.
+Ce répertoire est supprimé à la fin du job par un script epilog.
+Placez-vous dans le répertoire `/home/bench1/TP_tmpdir`.
+Consulter le fichier et lancer le job.
 ```
 sbatch job.slurm
 ```
 Analyser le fichier de sortie.
+
+<br/><br/>
+<h2>10. Utilisation de la fonctionnalité de job array</h2>
+
+Un "job array" dans SLURM permet d'exécuter de multiples tâches similaires avec une seule commande, simplifiant ainsi la gestion des travaux par lot.
+
+Déplacez-vous dans le répertoire `/home/bench1/TP_job_array`.
+Consluter le fichier de soumission job.slurm et exécuter le job.
+```
+sbatch job.slurm
+Analyser les fichiers de sortie.
+```
+<br/><br/>
+<h2>11. Utilisation de la fonctionnalité de job dependency</h2>
+
+La fonctionnalité de dépendance de tâches dans SLURM permet de spécifier des relations entre les travaux, déterminant ainsi l'ordre d'exécution en fonction de l'état des travaux précédents.
+
+Placez-vous dans le répertoire `/home/bench1/TP_job_dependency`.
+Consulter les fichiers et lancer les jobs avec dépendance. Consulter le statut des jobs avec l’alias squeue_, en particulier les colonnes DEPENDENCY et NODELIST(REASON).
+```
+./lancer
+squeue_
+```
 
 <br/><br/>
 <h2>12. Tests additionnels MPI - hello world & NPB</h2>
