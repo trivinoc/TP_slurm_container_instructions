@@ -21,7 +21,8 @@ Une fois connecté, privilégier l’utilisation de tmux, plus simple pour navig
 tmux new -s pasteur                # nouvelle session pasteur
 tmux attach -t pasteur             # se connecter à la session pasteur existante
 Ctrl+b then c                      # nouvelle fenêtre
-Ctrl+b then n  et Ctrl+b then p    # fenêtre suivante et fenêtre précédent
+Ctrl+b then n                      # fenêtre suivante
+Ctrl+b then p                      # fenêtre précédente
 Ctrl+b then d                      # se détacher de la session tmux
 ```
 
