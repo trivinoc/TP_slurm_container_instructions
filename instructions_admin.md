@@ -1,5 +1,5 @@
 
-<h1>Instructions TP slurm administrateur</h1>
+<h1>TP slurm - Instructions administrateur</h1>
 
 <br/><br/>
 <h2>Généralités</h2>
