@@ -175,124 +175,35 @@ srun --partition=short --export=DAKAR=2 /bin/env | grep DAKAR
 ```
 
 <br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<h2>5. Les partitions et accounts</h2>
+<h2>7. Comprendre la configuration du cluster et les limitations posées</h2>
 
-Créer une nouvelle partition avec 2 nœuds et autoriser l'utilisation uniquement au groupe unix bench1 (attention de reporter la partition dans les fichiers de configuration si vous souhaitez qu’elle soit persistante)
+Soumettre quelques commandes simples avec srun depuis le nœud de login avec l’utilisateur bench1
 ```
-scontrol create PartitionName=dakar MaxTime=INFINITE State=UP Nodes=c[1,2] AllowGroups=bench1
+srun --nodes=1 --ntasks=2 --time=00:01:00 --partition=short hostname
+srun --nodes=2 --ntasks=2 --time=00:01:00 --partition=short hostname
+srun --nodes=3 --ntasks=3 --time=00:01:00 --partition=short hostname
 ```
+Pourquoi cette dernière commande ne passe pas ?
 
-Modifier la nouvelle partition pour fixer le paramètre MaxTime sur 10 heures et vérifiez la partition
+Consulter la configuration des comptes utilisateurs
 ```
-scontrol  update PartitionName=dakar MaxTime=10:00:00
-scontrol  show partition=dakar
-```
-
-Connectez-vous sur le nœud de login avec l’utilisateur bench1 puis soumettre la commande suivante avec srun. Pourquoi cela échoue ?
-```
-srun --partition=dakar hostname
-```
-
-Créer l’account depuis le noeud slurm
-```
-sacctmgr create account name=bench1
-sacctmgr create user name=bench1 account=bench1 partition=Dakar
 sacctmgr  show assoc
-```
-
-Relancer la commande srun
-```
-srun --partition=dakar hostname
-```
-
-Tenter de soumettre le même job avec un délai de 24 heures. Consulter le statut du job avec squeue
-```
-srun  --time=24:00:00 --partition=dakar hostname & 
-```
-
-Modifier la partition pour définir l'état sur DRAIN et vérifier l'état avec la commande sinfo
-```
-scontrol  update PartitionName=dakar State=drain
-sinfo -p dakar
-```
-
-Soumettre un autre job avec la commande srun
-```
-srun --nodes=1 --ntasks=1 --time=00:01:00 --partition=dakar hostname
-```
-
-Supprimer la partition
-```
-scontrol delete PartitionName=dakar 
-```
-
-Supprimer les accounts
-```
-sacctmgr delete user bench1 cluster=my_cluster account=bench1
-sacctmgr -i delete account bench1
-sacctmgr show assoc
-```
-
-Vérifier la configuration qos actuelle
-```
-sacctmgr  show qos
-```
-
-Créer deux qos avec des limitations différentes
-```
-sacctmgr create qos padawan Priority=100 MaxJobs=1 MaxSubmit=2 MaxTRES=cpu=2
-sacctmgr create qos jedi Priority=10000 MaxJobs=4 MaxSubmit=8 MaxTRES=cpu=8
-sacctmgr  show qos
-```
-
-Créer deux accounts génériques avec une qos par défaut associée
-```
-sacctmgr create account name=eqa set qos=jedi
-sacctmgr create account name=eqb set qos=padawan
-sacctmgr show assoc
-```
-
-Associer les utilisateurs bench1 et bench2 aux deux accounts créés ci-dessus
-```
-sacctmgr  create user name=bench1 account=eqa
-sacctmgr  create user name=bench1 account=eqb
-sacctmgr  create user name=bench2 account=eqb
-sacctmgr show assoc
-```
-
-Ajouter la qos jedi à l'association bench1 / account eqb
-```
-sacctmgr  modify user bench1 where account=eqb set qos+=jedi
-```
-
-Afficher les caractéristiques de l'association
-```
 sacctmgr  show assoc where user=bench1
 ```
 
-Soumettre un job avec la qos avec l’utilisateur bench2 depuis le nœud de login
+Maitenant, consulter les configurations des QOS (Quality Of Service). Observee les différentes limitations positionnées. Consulter le manpage si necessaire `man sacctmgr`
 ```
-srun --nodes=3 --ntasks-per-node=3 --time=00:01:00 --qos=jedi hostname
-```
-
-Ajouter un dernier account chef et associé bench1 à celui-ci. La qos sélectionnée est normal
-```
-sacctmgr  create account name=chef qos=normal
-sacctmgr  create user name=bench1 account=chef qos=normal
+sacctmgr show qos
 ```
 
-Ajouter / supprimer une qos
-```
-sacctmgr create qos qostp 
-sacctmgr delete qos qostp
-```
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+
 
 
 
