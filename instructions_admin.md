@@ -219,5 +219,33 @@ sacctmgr  create user name=bench2 account=eqb
 sacctmgr show assoc
 ```
 
+Ajouter la qos jedi à l'association bench1 / account eqb
+```
+sacctmgr  modify user bench1 where account=eqb set qos+=jedi
+```
+
+Afficher les caractéristiques de l'association
+```
+sacctmgr  show assoc where user=bench1
+```
+
+Soumettre un job avec la qos avec l’utilisateur bench2 depuis le nœud de login
+```
+srun --nodes=3 --ntasks-per-node=3 --time=00:01:00 --qos=jedi hostname
+```
+
+Ajouter un dernier account chef et associé bench1 à celui-ci. La qos sélectionnée est normal
+```
+sacctmgr  create account name=chef qos=normal
+sacctmgr  create user name=bench1 account=chef qos=normal
+```
+
+Ajouter / supprimer une qos
+```
+sacctmgr create qos qostp 
+sacctmgr delete qos qostp
+```
+
+
 
 
