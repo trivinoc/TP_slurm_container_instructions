@@ -379,7 +379,7 @@ sacct_ -X -S 2024-04-01T00:00:01  -E 2024-04-30T23:59:59 --nnodes=2
 ```
 
 <br/><br/>
-<h2>Activer le Node Health Check (NHC)</h2>
+<h2>Modifier le statut des noeuds dans slurm</h2>
 
 Vérifiez le status des noeuds 
 ```
@@ -393,6 +393,9 @@ scontrol  update state=drain node=c[1-2] reason="redemarrage requis"
 sinfo_ -R 
 scontrol  update state=idle node=c[1-2]
 ```
+
+<br/><br/>
+<h2>Activer le Node Health Check (NHC)</h2>
 
 Activer nhc dans la configuration slurm
 ```
