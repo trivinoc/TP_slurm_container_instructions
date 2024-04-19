@@ -386,7 +386,7 @@ Et pour une sortie plus verbeuse (debug) :
 [root@c1 /]# nhc –d
 ```
 
-<h2>Mettre en place des scripts epilog/prolog</h2>
+<h2>Mettre en place les scripts epilog/prolog</h2>
 
 Ajouter un script de prologue afin de
  - créer un répertoire temporaire pour chaque job dans l’espace de travail partagé /workdir : `/workdir/$SLURM_USER.$SLURM_JOBID`
@@ -403,7 +403,23 @@ sbatch job.slurm
 ```
 Analyser le fichier de sortie.
 
+<h2>Tests additionnels MPI hello world & NPB</h2>
 
+Placez-vous dans le répertoire `TP_hello_world_mpi`. Compiler et lancer le job
+```
+make
+sbatch job.slurm
+```
+Faire varier les paramètres (nombre de noeuds, tasks …)
 
+Placez-vous dans le répertoire `TP_NPB3.3-MPI`. Compiler le noyau CFD BT (Block Tri-diagonal solver). Il s’agit d’un benchmark MPI.
+Une fois compilé, placez-vous dans le répertoire `run` et lancer le job
+```
+make BT CLASS=A
+cd run/
+sbatch job.slurm
+```
+Faire varier les paramètres (nombre de noeuds, tasks …)
 
+<h2>FIN</h2>
 
