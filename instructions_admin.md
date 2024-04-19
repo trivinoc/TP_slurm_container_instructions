@@ -1,4 +1,8 @@
-![image](https://github.com/trivinoc/TP_slurm_container_instructions/assets/115139596/d6e9de9b-2099-4c16-b775-a019b1a41412)Vous avez 3 alias définis dans votre environnement et utilisable pendant les TP :
+
+<h1>Instructions TP slurm administrateur</h1>
+
+
+Vous avez 3 alias définis dans votre environnement et utilisable pendant les TP :
 ```
 alias sacct_='\sacct -D --format=jobid%-13,user%-12,jobname%-35,submit,timelimit,partition,qos,nnodes,start,end,elapsed,state,exitcode%-6,Derivedexitcode%-6,nodelist%-200 '
 alias sinfo_='\sinfo --format="%100E %12U %19H %6t %N" '
@@ -22,12 +26,42 @@ La VM contenant les TP est hébergée chez le fournisseur OVH et est accessible 
 ssh almalinux@141.94.106.28 
 ```
 Le cluster slurm fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire TP_slurm_utilisateur, et utilisez l’un des alias :
-UP		: démarrage
-DOWN	: arrêt
-RESTART	: redémarrage
-STATE	: statut du cluster slurm
+```
+UP          # démarrage
+DOWN        # arrêt
+RESTART     # redémarrage
+STATE       # statut du cluster slurm
+```
 
 Lorsque le cluster est démarré, STATE doit vous retourner :
 ![image](https://github.com/trivinoc/TP_slurm_container_instructions/assets/115139596/0d55af76-4329-4e32-b2c9-c029641316a1)
 
+Le cluster slurm est composé de 6 conteneurs (nœuds)
+```
+mariadb      # la base de données mysql
+slurm        # le nœud d’administration (slurmctld, slurmdbd)
+c[1-3]       # les nœuds de calcul (slurmd puis slurmstepd pour les jobs)
+login        # nœud de login, non intégré au cluster slurm mais depuis lequel on peut soumettre des travaux (jobs) slurm
+```
+
+Il est possible de se connecter indépendamment sur chaque conteneur.
+
+Si vous opérez des modifications dans la configuration slurm, privilégier un RESTART pour la prise en compte des modifications (redémarrage de tous les services).
+
+3 utilisateurs sont disponibles pour se connecter au cluster :
+```
+root        # administration du cluster slurm
+bench1      # utilisateur principal pour le TP
+bench2      # utilisateur facultatif pour des tests additionnels
+```
+
+Pour vous connecter aux conteneurs, un script connect.sh est disponible dans le répertoire TP_slurm_utilisateur et prend une option obligatoire et une option facultative :
+```
+[almalinux@admin-1 TP_slurm_utilisateur]$ ./connect.sh 
+Le nom de l'image est obligatoire.
+Usage: ./connect.sh -n <nom_de_l_image> [-u <utilisateur>]
+Options:
+  -n, --name           Nom de l'image podman (obligatoire)
+  -u, --user           Nom de l'utilisateur (facultatif: par défaut root)
+```
 
