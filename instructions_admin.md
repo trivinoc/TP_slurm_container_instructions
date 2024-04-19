@@ -301,6 +301,61 @@ srun -A eqa --qos=jedi -N 3 -n 3 -p exclusive --cpus-per-task=1 hostname
 srun -A chef --qos=normal -N 3 -n 3 -p exclusive --cpus-per-task=1 hostname
 ```
 
+Créer dès maintenant une réservation d'une durée de 3 heures avec votre nodeset et pour l'utilisateur bench2 uniquement
+```
+scontrol  create reservation=pasteur nodes=c3 user=bench1 start=now duration=03:00:00
+```
+
+Vérifier la reservation
+```
+sinfo -T
+scontrol show reservation=pasteur
+```
+
+Mettre la réservation à jour afin d’ajouter le flag DAILY (la réservation sera répétée tous les jours à la même heure). Vérifier à nouveau la réservation
+```
+scontrol  update reservation=pasteur Flags+=DAILY
+```
+
+Soumettre un job dans la reservation en tant qu’utilisateur bench1
+```
+srun -p long --ntasks=4 --reservation=pasteur hostname
+```
+
+Supprimer la réservation
+```
+scontrol delete reservation=pasteur
+```
+
+<h2>Tester l'accounting utilisateur</h2>
+
+Vérifier l’accounting slurm des 5 derniers jobs
+```
+sacct -X | tail -5
+```
+
+Consulter les jobs exécutés depuis une certaine date pour l'utilisateur bench1
+```
+sacct -X -u bench1 -S 2024-04-24
+```
+
+Lancer la même commande avec un format optimisé exécutant l'alias sacct_
+```
+sacct_ -X -u bench1 -S 2024-04-24
+```
+
+Obtenir les jobs été exécutés sur c[1-2] entre des dates spécifiques
+```
+sacct_ -X -N c[1-2] -S 2024-04-22T10:30:00  -E 2024-04-22T12:42:00
+```
+
+Obtenir les jobs qui ont été exécutés sur 2 nœuds au cours du mois d’avril
+```
+sacct_ -X -S 2024-04-01T00:00:01  -E 2024-04-30T23:59:59 --nnodes=2
+```
+
+
+
 
 
 
