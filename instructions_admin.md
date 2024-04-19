@@ -14,11 +14,11 @@ Vous avez accès aux manpages dans les conteneurs : man srun ; man sbatch ; man 
 Une fois connecté, privilégier l’utilisation de tmux, plus simple pour naviguer entre plusieurs fenêtre et permet au formateur de visualiser aisément votre fenêtre lorsque vous sollicitez son aide. Quelque commandes tmux : 
 
 ```
-tmux new -s pasteur    		# créer une session tmux nommée pasteur
-tmux attach -t pasteur		# se connecter à la session pasteur existante
-Ctrl+c		                # nouvelle fenêtre
-Ctrl+n  et Ctrl+p	        # fenêtre suivante et fenêtre précédent
-Ctrl+d		                # se détacher de la session tmux
+tmux new -s pasteur                # nouvelle session pasteur
+tmux attach -t pasteur             # se connecter à la session pasteur existante
+Ctrl+b then c                      # nouvelle fenêtre
+Ctrl+b then n  et Ctrl+b then p    # fenêtre suivante et fenêtre précédent
+Ctrl+b then d                      # se détacher de la session tmux
 ```
 
 La VM contenant les TP est hébergée chez le fournisseur OVH et est accessible par ssh avec le login almalinux. Le mot de passe vous sera communiqué en séance. Exemple de connexion : 
@@ -245,6 +245,32 @@ Ajouter / supprimer une qos
 sacctmgr create qos qostp 
 sacctmgr delete qos qostp
 ```
+
+Utiliser salloc pour obtenir une allocation de ressources de slurm
+```
+salloc --nodes=1 --ntasks=2 --partition=short 
+```
+
+Exécuter ces deux commandes et comparer le résultat
+```
+hostname
+srun hostname
+```
+
+Vérifier les variables SLURM_* dans l'environnement du job
+```
+env | grep SLURM
+```
+
+Vérifier le statut du job avec et sans l’alias squeue 
+```
+squeue -j $SLURM_JOBID
+squeue_ -j $SLURM_JOBID
+```
+
+Libérer les ressources allouées par slurm
+> Ctrl+d  OR  exit
+
 
 
 
