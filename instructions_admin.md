@@ -113,3 +113,82 @@ short*       up    1:00:00      2   idle c[1-2]
 long         up   infinite      2   idle c[2-3]
 ```
 
+Consulter la version de slurm installée de différente manière
+```
+sinfo --version	
+sbatch --version
+```
+
+Consulter les partitions existantes et les nœuds déclarés
+```
+sinfo
+sinfo -s
+sinfo -N    # node-oriented format
+```
+
+Consulter les caractéristiques d’un noeud
+```
+scontrol show node=c1
+```
+
+Vérifier dans quelle partition un nœud est associé
+```
+sinfo -n c1
+```
+
+créer une nouvelle partition avec 2 nœuds et autoriser l'utilisation uniquement au groupe unix bench1 (attention de reporter la partition dans les fichiers de configuration si vous souhaitez qu’elle soit persistante)
+```
+scontrol create PartitionName=dakar MaxTime=INFINITE State=UP Nodes=c[1,2] AllowGroups=bench1
+```
+
+Modifier la nouvelle partition pour fixer le paramètre MaxTime sur 10 heures et vérifiez la partition
+```
+scontrol  update PartitionName=dakar MaxTime=10:00:00
+scontrol  show partition=dakar
+```
+
+Connectez-vous sur le nœud de login avec l’utilisateur bench1 puis soumettre la commande suivante avec srun. Pourquoi cela échoue ?
+```
+srun --partition=dakar hostname
+```
+
+Créer l’account depuis le noeud slurm
+```
+sacctmgr create account name=bench1
+sacctmgr create user name=bench1 account=bench1 partition=Dakar
+sacctmgr  show assoc
+```
+
+Relancer la commande srun
+```
+srun --partition=dakar hostname
+```
+
+Tenter de soumettre le même job avec un délai de 24 heures. Consulter le statut du job avec squeue
+```
+srun  --time=24:00:00 --partition=dakar hostname & 
+```
+
+Modifier la partition pour définir l'état sur DRAIN et vérifier l'état avec la commande sinfo
+```
+scontrol  update PartitionName=dakar State=drain
+sinfo -p dakar
+```
+
+Soumettre un autre job avec la commande srun
+```
+srun --nodes=1 --ntasks=1 --time=00:01:00 --partition=dakar hostname
+```
+
+Supprimer la partition
+```
+scontrol delete PartitionName=dakar 
+```
+
+Supprimer les accounts
+```
+sacctmgr delete user bench1 cluster=my_cluster account=bench1
+sacctmgr -i delete account bench1
+sacctmgr show assoc
+```
+
