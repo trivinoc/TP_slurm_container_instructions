@@ -301,7 +301,8 @@ Soumettre les commandes suivantes et consulter le statut des jobs avec l’aias 
 ```
 sbatch -A eqb --qos=padawan -N 1 -n 1 --wrap="hostname ; sleep 1m"
 ```
-puis
+
+Soumettre une série de job
 ```
 for i in {1..3}
 do
@@ -348,6 +349,7 @@ Supprimer la réservation
 scontrol delete reservation=pasteur
 ```
 
+<br/><br/>
 <h2>Accounting utilisateur</h2>
 
 Vérifier l’accounting slurm des 5 derniers jobs
