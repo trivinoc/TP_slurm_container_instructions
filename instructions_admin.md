@@ -2,7 +2,7 @@
 <h1>TP slurm - Instructions administrateur</h1>
 
 <br/><br/>
-<h2>Généralités</h2>
+<h2>1. Généralités</h2>
 
 Vous avez 3 alias définis dans votre environnement et utilisable pendant les TP.
 Ceux-ci permettent l'utilisation d'un format de sortie personnalisé pour chaque commande.
@@ -25,7 +25,7 @@ Ctrl+b then d                      # se détacher de la session tmux
 ```
 
 <br/><br/>
-<h2>Administration du cluster slurm</h2>
+<h2>2. Administration du cluster slurm</h2>
 
 La VM contenant les TP est hébergée chez le fournisseur OVH et est accessible par ssh avec le login almalinux. Le mot de passe vous sera communiqué en séance. Exemple de connexion : 
 ```
@@ -56,7 +56,7 @@ Il est possible de se connecter indépendamment sur chaque conteneur.
 Si vous opérez des modifications dans la configuration slurm, privilégier un RESTART pour la prise en compte des modifications (redémarrage de tous les services).
 
 <br/><br/>
-<h2>Connexion au cluster</h2>
+<h2>3. Connexion au cluster</h2>
 
 3 utilisateurs sont disponibles pour se connecter au cluster :
 ```
@@ -96,7 +96,7 @@ podman exec --interactive --user bench1 --tty login bash
 ```
 
 <br/><br/>
-<h2>Configuration du cluster</h2>
+<h2>4. Configuration du cluster</h2>
 
 Compléter les différents fichiers de configuration slurm avec les valeurs adéquates (mot clef A_REMPLACER)
 ```
@@ -150,7 +150,7 @@ sinfo -n c1
 ```
 
 <br/><br/>
-<h2>Les partitions et accounts</h2>
+<h2>5. Les partitions et accounts</h2>
 
 Créer une nouvelle partition avec 2 nœuds et autoriser l'utilisation uniquement au groupe unix bench1 (attention de reporter la partition dans les fichiers de configuration si vous souhaitez qu’elle soit persistante)
 ```
@@ -263,7 +263,7 @@ sacctmgr delete qos qostp
 ```
 
 <br/><br/>
-<h2>Commandes d'allocation et de soumission de jobs</h2>
+<h2>6. Commandes d'allocation et de soumission de jobs</h2>
 
 Utiliser salloc pour obtenir une allocation de ressources de slurm
 ```
@@ -322,7 +322,7 @@ srun -A chef --qos=normal -N 3 -n 3 -p exclusive --cpus-per-task=1 hostname
 ```
 
 <br/><br/>
-<h2>Réservations</h2>
+<h2>7. Réservations</h2>
 
 Créer dès maintenant une réservation d'une durée de 3 heures avec votre nodeset et pour l'utilisateur bench2 uniquement
 ```
@@ -351,7 +351,7 @@ scontrol delete reservation=pasteur
 ```
 
 <br/><br/>
-<h2>Accounting utilisateur</h2>
+<h2>8. Accounting utilisateur</h2>
 
 Vérifier l’accounting slurm des 5 derniers jobs
 ```
@@ -379,7 +379,7 @@ sacct_ -X -S 2024-04-01T00:00:01  -E 2024-04-30T23:59:59 --nnodes=2
 ```
 
 <br/><br/>
-<h2>Modifier le statut des noeuds dans slurm</h2>
+<h2>9. Modifier le statut des noeuds dans slurm</h2>
 
 Vérifiez le status des noeuds 
 ```
@@ -395,7 +395,7 @@ scontrol  update state=idle node=c[1-2]
 ```
 
 <br/><br/>
-<h2>Activer le Node Health Check (NHC)</h2>
+<h2>10. Activer le Node Health Check (NHC)</h2>
 
 Activer nhc dans la configuration slurm
 ```
@@ -418,7 +418,7 @@ Et pour une sortie plus verbeuse (debug) :
 ```
 
 <br/><br/>
-<h2>Activer l'utilisation des scripts epilog/prolog</h2>
+<h2>11. Activer l'utilisation des scripts epilog/prolog</h2>
 
 Ajouter un script de prologue afin de
  - créer un répertoire temporaire pour chaque job dans l’espace de travail partagé /workdir : `/workdir/$SLURM_USER.$SLURM_JOBID`
@@ -436,7 +436,7 @@ sbatch job.slurm
 Analyser le fichier de sortie.
 
 <br/><br/>
-<h2>Tests additionnels MPI - hello world & NPB</h2>
+<h2>12. Tests additionnels MPI - hello world & NPB</h2>
 
 Placez-vous dans le répertoire `/home/bench1/TP_hello_world_mpi`. Compiler et lancer le job
 ```
