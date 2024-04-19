@@ -393,7 +393,10 @@ sinfo_ -R
 scontrol  update state=idle node=c[1-2]
 ```
 
-Activer nhc dans la configuration slurm `grep –i HealthCheck /etc/slurm/slurm.conf`
+Activer nhc dans la configuration slurm
+```
+grep –i HealthCheck /etc/slurm/slurm.conf
+```
 Ajouter quelques règles de contrôle nhc (fichier de configuration `/etc/nhc/nhc.conf`)
 Voir le lien (https://github.com/mej/nhc#installation)
 > * || check_hw_physmem XXgb XXgb 5%
@@ -422,7 +425,7 @@ Ajouter un script d’epilog afin de
  - synchroniser les écritures en cache sur le stockage `sync`
 
 Lancer un job utilisateur afin de vérifier la présence de la variable d’environnement et l’existence du répertoire temporaire
-Pour cela, placez-vous dans le répertoire `TP_tmpdir` de l’utilisateur bench1. Consulter le fichier et lancer le job.
+Pour cela, placez-vous dans le répertoire `/home/bench1/TP_tmpdir` de l’utilisateur bench1. Consulter le fichier et lancer le job.
 ```
 sbatch job.slurm
 ```
@@ -431,21 +434,21 @@ Analyser le fichier de sortie.
 <br/><br/>
 <h2>Tests additionnels MPI - hello world & NPB</h2>
 
-Placez-vous dans le répertoire `TP_hello_world_mpi`. Compiler et lancer le job
+Placez-vous dans le répertoire `/home/bench1/TP_hello_world_mpi`. Compiler et lancer le job
 ```
 make
 sbatch job.slurm
 ```
 Faire varier les paramètres (nombre de noeuds, tasks …)
 
-Placez-vous dans le répertoire `TP_NPB3.3-MPI`. Compiler le noyau CFD BT (Block Tri-diagonal solver). Il s’agit d’un benchmark MPI.
-Une fois compilé, placez-vous dans le répertoire `run` et lancer le job
+Placez-vous dans le répertoire `/home/bench1/TP_NPB3.3-MPI`. Compiler le noyau CFD BT (Block Tri-diagonal solver). Il s’agit d’un benchmark utilisant MPI.
+Une fois compilé, placez-vous dans le répertoire `/home/bench1/TP_NPB3.3-MPI/run` et lancer le job
 ```
 make BT CLASS=A
 cd run/
 sbatch job.slurm
 ```
 Faire varier les paramètres (nombre de noeuds, tasks …)
-
+<br/><br/>
 <h2>FIN</h2>
 
