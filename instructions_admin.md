@@ -39,6 +39,7 @@ STATE       # statut du cluster slurm
 ```
 
 Lorsque le cluster est démarré, STATE doit vous retourner :
+
 ![image](https://github.com/trivinoc/TP_slurm_container_instructions/assets/115139596/0d55af76-4329-4e32-b2c9-c029641316a1)
 
 Le cluster slurm est composé de 6 conteneurs (nœuds)
