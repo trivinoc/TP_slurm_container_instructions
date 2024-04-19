@@ -199,6 +199,7 @@ sacctmgr show qos
 Soumettre les commandes suivantes et consulter le statut des jobs avec l’alias squeue_
 ```
 sbatch -A eqb --qos=padawan -N 1 -n 1 --wrap="hostname ; sleep 1m"
+squeue_
 ```
 
 Soumettre une série de job
