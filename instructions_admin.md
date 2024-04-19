@@ -30,7 +30,7 @@ La VM contenant les TP est hébergée chez le fournisseur OVH et est accessible 
 ```
 ssh almalinux@141.94.106.28 
 ```
-Le cluster slurm fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire TP_slurm_utilisateur, et utilisez l’un des alias :
+Le cluster slurm fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire `/home/bench1/TP_slurm_utilisateur`, et utilisez l’un des alias :
 ```
 UP          # démarrage
 DOWN        # arrêt
@@ -64,7 +64,7 @@ bench1      # utilisateur principal pour le TP
 bench2      # utilisateur facultatif pour des tests additionnels
 ```
 
-Pour vous connecter aux conteneurs, un script connect.sh est disponible dans le répertoire TP_slurm_utilisateur et prend une option obligatoire et une option facultative :
+Pour vous connecter aux conteneurs, un script connect.sh est disponible dans le répertoire `/home/bench1/TP_slurm_utilisateur` et prend une option obligatoire et une option facultative :
 ```
 [almalinux@admin-1 TP_slurm_utilisateur]$ ./connect.sh 
 Le nom de l'image est obligatoire.
