@@ -447,6 +447,7 @@ sbatch job.slurm
 ```
 Faire varier les paramètres (nombre de noeuds, tasks …)
 
+<br/><br/>
 <h3>12.2 NPB benchmark</h3>
 
 Placez-vous dans le répertoire `/home/bench1/TP_NPB3.3-MPI`. Compiler le noyau CFD BT (Block Tri-diagonal solver). Il s’agit d’un benchmark utilisant MPI.
