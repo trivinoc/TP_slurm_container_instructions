@@ -55,7 +55,7 @@ login        # nœud de login, non intégré au cluster slurm mais depuis lequel
 
 Il est possible de se connecter indépendamment sur chaque conteneur.
 
-Si vous opérez des modifications dans la configuration slurm, privilégier un RESTART pour la prise en compte des modifications (redémarrage de tous les services).
+Si vous opérez des modifications dans la configuration slurm, privilégiez un RESTART pour la prise en compte des modifications (redémarrage de tous les services).
 
 <br/><br/>
 <h2>3. Connexion au cluster</h2>
