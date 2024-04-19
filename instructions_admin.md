@@ -438,7 +438,7 @@ Analyser le fichier de sortie.
 <br/><br/>
 <h2>12. Tests additionnels MPI - hello world & NPB</h2>
 
-<h3>MPI hello world</h3>
+<h3>12.1 MPI hello world</h3>
 
 Placez-vous dans le répertoire `/home/bench1/TP_hello_world_mpi`. Compiler et lancer le job
 ```
@@ -447,7 +447,7 @@ sbatch job.slurm
 ```
 Faire varier les paramètres (nombre de noeuds, tasks …)
 
-<h3>NPB benchmark</h3>
+<h3>12.2 NPB benchmark</h3>
 
 Placez-vous dans le répertoire `/home/bench1/TP_NPB3.3-MPI`. Compiler le noyau CFD BT (Block Tri-diagonal solver). Il s’agit d’un benchmark utilisant MPI.
 Une fois compilé, placez-vous dans le répertoire `/home/bench1/TP_NPB3.3-MPI/run` et lancer le job
