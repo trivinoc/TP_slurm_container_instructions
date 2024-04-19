@@ -31,7 +31,7 @@ La VM contenant les TP est hébergée chez le fournisseur OVH et est accessible 
 ```
 ssh almalinux@141.94.106.28 
 ```
-Le cluster slurm fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire `/home/bench1/TP_slurm_utilisateur`, et utilisez l’un des alias :
+Le cluster slurm fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire `/home/bench1/TP_slurm_utilisateur`, et utiliser l’un des alias :
 ```
 UP          # démarrage
 DOWN        # arrêt
