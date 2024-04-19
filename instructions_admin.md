@@ -386,6 +386,22 @@ Et pour une sortie plus verbeuse (debug) :
 [root@c1 /]# nhc –d
 ```
 
+<h2>Mettre en place des scripts epilog/prolog</h2>
+
+Ajouter un script de prologue afin de
+ - créer un répertoire temporaire pour chaque job dans l’espace de travail partagé /workdir : `/workdir/$SLURM_USER.$SLURM_JOBID`
+ - positionner les droits d’accès et owner du répertoire créé
+
+Ajouter un script d’epilog afin de
+ - supprimer le répertoire temporaire du job et son contenu (l’utilisateur doit copier les données qu’il souhaite conserver à la fin du job).
+ - synchroniser les écritures en cache sur le stockage `sync`
+
+Lancer un job utilisateur afin de vérifier la présence de la variable d’environnement et l’existence du répertoire temporaire
+Pour cela, placez-vous dans le répertoire `TP_tmpdir` de l’utilisateur bench1. Consulter le fichier et lancer le job.
+```
+sbatch job.slurm
+```
+Analyser le fichier de sortie.
 
 
 
