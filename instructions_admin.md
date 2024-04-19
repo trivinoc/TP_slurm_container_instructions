@@ -354,6 +354,38 @@ Obtenir les jobs qui ont été exécutés sur 2 nœuds au cours du mois d’avri
 sacct_ -X -S 2024-04-01T00:00:01  -E 2024-04-30T23:59:59 --nnodes=2
 ```
 
+<h2>Activer le Node Health Check (NHC)</h2>
+
+Vérifiez le status des noeuds 
+```
+sinfo -n c[1-3]
+sinfo -R -n c[1-3]
+```
+
+Modifier le statut des noeuds dans slurm 
+```
+scontrol  update state=drain node=c[1-2] reason="redemarrage requis"
+sinfo_ -R 
+scontrol  update state=idle node=c[1-2]
+```
+
+Activer nhc dans la configuration slurm `grep –i HealthCheck /etc/slurm/slurm.conf`
+Ajouter quelques règles de contrôle nhc (fichier de configuration `/etc/nhc/nhc.conf`)
+Voir le lien (https://github.com/mej/nhc#installation)
+> * || check_hw_physmem XXgb XXgb 5%
+> * || check_hw_cpuinfo 4 X X
+
+
+Run nhc explicitly. Connectez vous sur le noeud c1 en root et exécuter :
+```
+[root@c1 /]# nhc –v
+```
+Puis consulter la fin du fichier `/var/log/nhc.log`
+Et pour une sortie plus verbeuse (debug) :
+```
+[root@c1 /]# nhc –d
+```
+
 
 
 
