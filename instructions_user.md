@@ -151,7 +151,7 @@ squeue_ -j $SLURM_JOBID
 Libérer les ressources allouées par slurm
 > Ctrl+d  OR  exit
 
-Déplacez-vous dans le répertoire TP_job_simple et soumettez le script job.slurm. Ecraser une ou plusieurs options sbatch en ligne de commande afin de constater la préponderance des options.
+Déplacez-vous dans le répertoire `/home/bench1/TP_job_simple` et soumettez le script job.slurm. Ecraser une ou plusieurs options sbatch en ligne de commande afin de constater la préponderance des options.
 ```
 cd /home/bench1/TP_job_simple
 sbatch  job.slurm
