@@ -377,12 +377,12 @@ sacct -X | tail -5
 
 Consulter les jobs exécutés depuis une certaine date pour l'utilisateur bench1
 ```
-sacct -X -u bench1 -S 2024-04-24
+sacct -X -u bench1 -S 2024-04-22
 ```
 
 Lancer la même commande avec un format optimisé exécutant l'alias sacct_
 ```
-sacct_ -X -u bench1 -S 2024-04-24
+sacct_ -X -u bench1 -S 2024-04-22
 ```
 
 Obtenir les jobs été exécutés sur c[1-2] entre des dates spécifiques
