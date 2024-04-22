@@ -261,7 +261,7 @@ Afficher les caractéristiques de l'association
 sacctmgr show assoc where user=bench1
 ```
 
-Soumettre un job avec la qos avec l’utilisateur bench2 depuis le nœud de login
+Soumettre un job avec la qos avec l’utilisateur bench1 depuis le nœud de login
 ```
 srun --nodes=3 --ntasks-per-node=3 --time=00:01:00 --qos=jedi hostname
 ```
