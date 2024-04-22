@@ -186,9 +186,9 @@ srun --partition=dakar hostname
 
 Créer l’account depuis le noeud slurm
 ```
-sacctmgr create account name=bench1
-sacctmgr create user name=bench1 account=bench1 partition=Dakar
-sacctmgr  show assoc
+sacctmgr -i create account name=bench1
+sacctmgr -i create user name=bench1 account=bench1 partition=Dakar
+sacctmgr show assoc
 ```
 
 Relancer la commande srun
@@ -198,12 +198,12 @@ srun --partition=dakar hostname
 
 Tenter de soumettre le même job avec un délai de 24 heures. Consulter le statut du job avec squeue
 ```
-srun  --time=24:00:00 --partition=dakar hostname & 
+srun --time=24:00:00 --partition=dakar hostname & 
 ```
 
 Modifier la partition pour définir l'état sur DRAIN et vérifier l'état avec la commande sinfo
 ```
-scontrol  update PartitionName=dakar State=drain
+scontrol update PartitionName=dakar State=drain
 sinfo -p dakar
 ```
 
@@ -219,46 +219,46 @@ scontrol delete PartitionName=dakar
 
 Supprimer les accounts
 ```
-sacctmgr delete user bench1 cluster=my_cluster account=bench1
+sacctmgr -i delete user bench1 cluster=my_cluster account=bench1
 sacctmgr -i delete account bench1
 sacctmgr show assoc
 ```
 
 Vérifier la configuration qos actuelle
 ```
-sacctmgr  show qos
+sacctmgr show qos
 ```
 
 Créer deux qos avec des limitations différentes
 ```
-sacctmgr create qos padawan Priority=100 MaxJobs=1 MaxSubmit=2 MaxTRES=cpu=2
-sacctmgr create qos jedi Priority=10000 MaxJobs=4 MaxSubmit=8 MaxTRES=cpu=8
-sacctmgr  show qos
+sacctmgr -i create qos padawan Priority=100 MaxJobs=1 MaxSubmit=2 MaxTRES=cpu=2
+sacctmgr -i create qos jedi Priority=10000 MaxJobs=4 MaxSubmit=8 MaxTRES=cpu=8
+sacctmgr show qos
 ```
 
 Créer deux accounts génériques avec une qos par défaut associée
 ```
-sacctmgr create account name=eqa set qos=jedi
-sacctmgr create account name=eqb set qos=padawan
+sacctmgr -i create account name=eqa set qos=jedi
+sacctmgr -i create account name=eqb set qos=padawan
 sacctmgr show assoc
 ```
 
 Associer les utilisateurs bench1 et bench2 aux deux accounts créés ci-dessus
 ```
-sacctmgr  create user name=bench1 account=eqa
-sacctmgr  create user name=bench1 account=eqb
-sacctmgr  create user name=bench2 account=eqb
+sacctmgr -i create user name=bench1 account=eqa
+sacctmgr -i create user name=bench1 account=eqb
+sacctmgr -i create user name=bench2 account=eqb
 sacctmgr show assoc
 ```
 
 Ajouter la qos jedi à l'association bench1 / account eqb
 ```
-sacctmgr  modify user bench1 where account=eqb set qos+=jedi
+sacctmgr -i modify user bench1 where account=eqb set qos+=jedi
 ```
 
 Afficher les caractéristiques de l'association
 ```
-sacctmgr  show assoc where user=bench1
+sacctmgr show assoc where user=bench1
 ```
 
 Soumettre un job avec la qos avec l’utilisateur bench2 depuis le nœud de login
@@ -268,14 +268,14 @@ srun --nodes=3 --ntasks-per-node=3 --time=00:01:00 --qos=jedi hostname
 
 Ajouter un dernier account chef et associé bench1 à celui-ci. La qos sélectionnée est normal
 ```
-sacctmgr  create account name=chef qos=normal
-sacctmgr  create user name=bench1 account=chef qos=normal
+sacctmgr -i create account name=chef qos=normal
+sacctmgr -i create user name=bench1 account=chef qos=normal
 ```
 
 Ajouter / supprimer une qos
 ```
-sacctmgr create qos qostp 
-sacctmgr delete qos qostp
+sacctmgr -i create qos qostp 
+sacctmgr -i delete qos qostp
 ```
 
 <br/><br/>
