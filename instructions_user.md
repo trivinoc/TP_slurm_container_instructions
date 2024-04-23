@@ -41,7 +41,12 @@ RESTART     # redémarrage du cluster slurm
 STATE       # statut du cluster slurm
 ```
 
-Lorsque le cluster est démarré, la commande STATE doit vous retourner les informations suivantes :
+Démmarrer le cluster
+```
+UP
+```
+
+Lorsque celui-ci est démarré, la commande STATE doit vous retourner les informations suivantes :
 ```
 [almalinux@user-X TP_slurm_utilisateur]$ STATE
 CONTAINER ID  IMAGE                             COMMAND     CREATED         STATUS         PORTS       NAMES
@@ -60,10 +65,6 @@ slurm        # le nœud d’administration (slurmctld, slurmdbd)
 c[1-3]       # les nœuds de calcul (slurmd puis slurmstepd pour les jobs)
 login        # nœud de login, non intégré au cluster slurm mais depuis lequel on peut soumettre des travaux (jobs) slurm
 ```
-
-Il est possible de se connecter indépendamment sur chaque conteneur.
-
-Si vous opérez des modifications dans la configuration slurm, privilégiez un RESTART pour la prise en compte des modifications (redémarrage de tous les services).
 
 <br/><br/>
 <h2>3. Connexion au cluster</h2>
@@ -85,17 +86,7 @@ Options:
   -u, --user           Nom de l'utilisateur (facultatif: par défaut root)     # bench1, bench2, root  
 ```
 
-Par exemple pour se connecter avec root au conteneur de management slurm :
-```
-[almalinux@user-X TP_slurm_utilisateur]$ ./connect.sh -n slurm
-podman-compose version: 1.0.6
-['podman', '--version', '']
-using podman version: 4.6.1
-podman exec --interactive --tty slurm bash
-[root@slurm /]#
-```
-
-Pour le déroulement de ce TP, vous pouvez simplement vous connecter au conteneur login avec l'utilisateur bench1 comme ceci :
+Pour le déroulement de ce TP, vous pouvez simplement vous connecter au conteneur **login** avec l'utilisateur **bench1** comme ceci :
 ```
 [almalinux@user-X TP_slurm_utilisateur]$ ./connect.sh -n login -u bench1
 podman-compose version: 1.0.6
