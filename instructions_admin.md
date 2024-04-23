@@ -1,5 +1,6 @@
 
-<h1>TP slurm - Instructions administrateur</h1>
+
+<h1>TP slurm - Instructions utilisateur</h1>
 
 <br/><br/>
 <h2>1. Généralités</h2>
@@ -32,7 +33,7 @@ La VM contenant les TP est hébergée chez le fournisseur OVH et est accessible 
 ```
 ssh almalinux@141.94.106.28 
 ```
-Le cluster slurm fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire `/home/almalinux/TP_slurm_utilisateur`, et utiliser l’un des alias :
+Le cluster slurm fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire `/home/almalinux/TP_slurm_utilisateur` de votre machine virtuelle admin-X, et utiliser l’un des alias :
 ```
 UP          # démarrage
 DOWN        # arrêt
@@ -42,7 +43,7 @@ STATE       # statut du cluster slurm
 
 Lorsque le cluster est démarré, STATE doit vous retourner :
 ```
-[almalinux@admin-4 TP_slurm_utilisateur]$ STATE
+[almalinux@admin-X TP_slurm_utilisateur]$ STATE
 CONTAINER ID  IMAGE                             COMMAND     CREATED         STATUS         PORTS       NAMES
 24709a5b010a  docker.io/library/mariadb:latest  mariadbd    15 seconds ago  Up 15 seconds              mariadb
 ad972835acf8  localhost/slurm-23:latest                     13 seconds ago  Up 13 seconds              slurm
@@ -74,9 +75,9 @@ bench1      # utilisateur principal pour le TP
 bench2      # utilisateur facultatif pour des tests additionnels
 ```
 
-Pour vous connecter aux conteneurs, un script connect.sh est disponible dans le répertoire `/home/bench1/TP_slurm_utilisateur` et prend une option obligatoire et une option facultative :
+Pour vous connecter aux conteneurs, un script connect.sh est disponible dans le répertoire `/home/almalinux/TP_slurm_utilisateur` de la VM admin-X et prend une option obligatoire ainsi qu'une option facultative :
 ```
-[almalinux@admin-1 TP_slurm_utilisateur]$ ./connect.sh 
+[almalinux@admin-X TP_slurm_utilisateur]$ ./connect.sh 
 Le nom de l'image est obligatoire.
 Usage: ./connect.sh -n <nom_de_l_image> [-u <utilisateur>]
 Options:
@@ -86,7 +87,7 @@ Options:
 
 Par exemple pour se connecter avec root au conteneur de management slurm :
 ```
-[almalinux@admin-1 TP_slurm_utilisateur]$ ./connect.sh -n slurm
+[almalinux@admin-X TP_slurm_utilisateur]$ ./connect.sh -n slurm
 podman-compose version: 1.0.6
 ['podman', '--version', '']
 using podman version: 4.6.1
@@ -96,7 +97,7 @@ podman exec --interactive --tty slurm bash
 
 Pour se connecter avec l’utilisateur bench1 au noeud de login :
 ```
-[almalinux@admin-1 TP_slurm_utilisateur]$ ./connect.sh -n login -u bench1
+[almalinux@admin-X TP_slurm_utilisateur]$ ./connect.sh -n login -u bench1
 podman-compose version: 1.0.6
 ['podman', '--version', '']
 using podman version: 4.6.1
