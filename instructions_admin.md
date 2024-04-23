@@ -81,8 +81,8 @@ Pour vous connecter aux conteneurs, un script connect.sh est disponible dans le 
 Le nom de l'image est obligatoire.
 Usage: ./connect.sh -n <nom_de_l_image> [-u <utilisateur>]
 Options:
-  -n, --name           Nom de l'image podman (obligatoire)
-  -u, --user           Nom de l'utilisateur (facultatif: par défaut root)
+  -n, --name           Nom de l'image podman (obligatoire)                    # colonne NAMES de la sortie de la commande STATE
+  -u, --user           Nom de l'utilisateur (facultatif: par défaut root)     # bench1, bench2, root  
 ```
 
 Par exemple pour se connecter avec root au conteneur de management slurm :
