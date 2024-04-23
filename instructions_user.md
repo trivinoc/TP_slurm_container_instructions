@@ -133,7 +133,7 @@ sbatch  job.slurm
 cat slurm-*.out
 ```
 
-Modifier les valeurs des options `-N 2` et `--ntasks-per-node=3` dans le fichier **job.slurm** puis relancer le job.
+Modifier les valeurs des options par `-N 2` et `--ntasks-per-node=3` dans le fichier **job.slurm** puis relancer le job.
 Constater les différences dans les résultats.
 
 Ecraser une ou plusieurs options sbatch en ligne de commande afin de constater l'ordre de prise en compte des options (l'option passée en ligne de commande est prépondérante).
