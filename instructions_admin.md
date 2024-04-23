@@ -437,12 +437,12 @@ Voir le lien (https://github.com/mej/nhc#installation)
 
 Run nhc explicitly. Connectez vous sur le noeud c1 en root et exécuter :
 ```
-[root@c1 /]# nhc –v
+[root@c1 /]# nhc -v
 ```
 Puis consulter la fin du fichier `/var/log/nhc.log`
 Et pour une sortie plus verbeuse (debug) :
 ```
-[root@c1 /]# nhc –d
+[root@c1 /]# nhc -d
 ```
 
 <br/><br/>
