@@ -449,7 +449,7 @@ Et pour une sortie plus verbeuse (debug) :
 <h2>11. Activer l'utilisation des scripts epilog/prolog</h2>
 
 Ajouter un script de prologue afin de
- - créer un répertoire temporaire pour chaque job dans l’espace de travail partagé /workdir : `/workdir/$SLURM_USER.$SLURM_JOBID`
+ - créer un répertoire temporaire pour chaque job dans l’espace de travail partagé /workdir : `/workdir/$SLURM_job_USER.$SLURM_JOB_ID`
  - positionner les droits d’accès et owner du répertoire créé
 
 Ajouter un script d’epilog afin de
