@@ -42,8 +42,16 @@ STATE       # statut du cluster slurm
 ```
 
 Lorsque le cluster est démarré, STATE doit vous retourner :
-
-![image](https://github.com/trivinoc/TP_slurm_container_instructions/assets/115139596/0d55af76-4329-4e32-b2c9-c029641316a1)
+```
+[almalinux@admin-4 TP_slurm_utilisateur]$ STATE
+CONTAINER ID  IMAGE                             COMMAND     CREATED         STATUS         PORTS       NAMES
+24709a5b010a  docker.io/library/mariadb:latest  mariadbd    15 seconds ago  Up 15 seconds              mariadb
+ad972835acf8  localhost/slurm-23:latest                     13 seconds ago  Up 13 seconds              slurm
+62f10538b34f  localhost/slurm-23:latest                     11 seconds ago  Up 11 seconds              c1
+d1f8478a2f45  localhost/slurm-23:latest                     9 seconds ago   Up 9 seconds               c2
+65fa8a7a5941  localhost/slurm-23:latest                     7 seconds ago   Up 7 seconds               c3
+ae13f39c1c8b  localhost/slurm-23:latest                     5 seconds ago   Up 5 seconds               login
+```
 
 Le cluster slurm est composé de 6 conteneurs (nœuds)
 ```
