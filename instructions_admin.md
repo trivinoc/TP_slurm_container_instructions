@@ -105,6 +105,10 @@ podman exec --interactive --user bench1 --tty login bash
 [bench1@login ~]$
 ```
 
+Pour le déroulement de ce TP, vous devez
+ - vous connecter au conteneur login avec l'utilisateur bench1 pour exécuter les commandes `salloc`, `sbatch` et `srun`
+ - vous connecter au conteneur slurm avec l'utilisateur root pour opérer les commandes d'administration `scontrol create/delete/update` et `sacctmgr create/delete/modify`
+
 <br/><br/>
 <h2>4. Configuration du cluster</h2>
 
