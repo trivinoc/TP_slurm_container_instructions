@@ -33,12 +33,12 @@ Le TP est hébergé sur une Machine Virtuelle (VM) chez le fournisseur OVH et es
 ```
 ssh almalinux@141.94.106.28 
 ```
-Le cluster slurm fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire `/home/almalinux/TP_slurm_utilisateur` de votre machine virtuelle user-X, et utiliser l’un des alias :
+Le cluster slurm est accessible depuis le VM et fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire `/home/almalinux/TP_slurm_utilisateur` de votre machine virtuelle admin-X, et utiliser l’un des alias :
 ```
-UP          # démarrage
-DOWN        # arrêt
-RESTART     # redémarrage
-STATE       # statut du cluster slurm
+UP          # démarrage du cluster slurm 
+DOWN        # arrêt du cluster slurm
+RESTART     # redémarrage du cluster slurm
+STATE
 ```
 
 Lorsque le cluster est démarré, STATE doit vous retourner :
