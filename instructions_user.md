@@ -38,7 +38,7 @@ Le cluster slurm est accessible depuis le VM et fonctionne sur la base de conten
 UP          # démarrage du cluster slurm 
 DOWN        # arrêt du cluster slurm
 RESTART     # redémarrage du cluster slurm
-STATE
+STATE       # statut du cluster slurm
 ```
 
 Lorsque le cluster est démarré, STATE doit vous retourner :
