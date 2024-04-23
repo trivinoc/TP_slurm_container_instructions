@@ -95,7 +95,7 @@ podman exec --interactive --tty slurm bash
 [root@slurm /]#
 ```
 
-Pour se connecter avec l’utilisateur bench1 au noeud de login :
+Pour le déroulement de ce TP, vous pouvez simplement vous connecter au conteneur login avec l'utilisateur bench1 comme ceci :
 ```
 [almalinux@user-X TP_slurm_utilisateur]$ ./connect.sh -n login -u bench1
 podman-compose version: 1.0.6
@@ -104,8 +104,6 @@ using podman version: 4.6.1
 podman exec --interactive --user bench1 --tty login bash
 [bench1@login ~]$
 ```
-
-Pour le déroulement de ce TP, vous pouvez simplement vous connecter au conteneur login avec l'utilisateur bench1.
 
 <br/><br/>
 <h2>4. Configuration du cluster</h2>
