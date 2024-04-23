@@ -192,7 +192,7 @@ srun --partition=dakar hostname
 Créer l’account depuis le noeud slurm
 ```
 sacctmgr -i create account name=bench1
-sacctmgr -i create user name=bench1 account=bench1 partition=Dakar
+sacctmgr -i create user name=bench1 account=bench1 partition=dakar
 sacctmgr show assoc
 ```
 
