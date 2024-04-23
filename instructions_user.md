@@ -184,7 +184,7 @@ Remplacer dans le script **job.slurm** la ligne `srun hostname` par celle-ci
 ```
 srun --label --distribution=block hostname | sort
 ```
-Consulter la documentation `man srun` pour connaitre le rôle des options `--label --distribution=`.
+Consulter la documentation `man srun` pour connaitre le rôle des options `--label` et `--distribution`.
 Changer le mode de distribution et observer la différence dans la sortie
 ```
 srun --label --distribution=cyclic hostname | sort
@@ -193,13 +193,16 @@ srun --label --distribution=cyclic hostname | sort
 <br/><br/>
 <h2>7. Comprendre la configuration du cluster et les limitations posées</h2>
 
+<h3>6.6 Limite des partitions </h3>
+
 Soumettre quelques commandes simples avec srun depuis le nœud de login avec l’utilisateur bench1
 ```
 srun --nodes=1 --ntasks=2 --time=00:01:00 --partition=short hostname
 srun --nodes=2 --ntasks=2 --time=00:01:00 --partition=short hostname
-srun --nodes=3 --ntasks=3 --time=00:01:00 --partition=short hostname
+srun --nodes=3 --ntasks=3 --time=00:01:00 --partition=short hostname &
+squeue
 ```
-Pourquoi cette dernière commande ne passe pas ?
+Pourquoi cette dernière commande ne passe pas ? (voir la colomne NODELIST(REASON) de `squeue`)
 
 Consulter la configuration des comptes utilisateurs
 ```
