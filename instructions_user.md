@@ -125,46 +125,32 @@ sinfo -n c1
 <br/><br/>
 <h2>6. Commandes d'allocation et de soumission de jobs</h2>
 
-Utiliser salloc pour obtenir une allocation de ressources de slurm
-```
-salloc --nodes=1 --ntasks=2 --partition=short 
-```
-
-Exécuter ces deux commandes et comparer le résultat
-```
-hostname
-srun hostname
-```
-
-Vérifier les variables SLURM_* dans l'environnement du job
-```
-env | grep SLURM
-```
-
-Vérifier le statut du job avec et sans l’alias squeue 
-```
-squeue -j $SLURM_JOBID
-squeue_ -j $SLURM_JOBID
-```
-
-Libérer les ressources allouées par slurm
-> Ctrl+d  OR  exit
-
-Déplacez-vous dans le répertoire `/home/bench1/TP_job_simple` et soumettez le script **job.slurm**. Ecraser une ou plusieurs options sbatch en ligne de commande afin de constater la préponderance des options.
+Déplacez-vous dans le répertoire `/home/bench1/TP_job_simple`. Consulter le contenu et soumettre le script **job.slurm**.
+Observer le résultat des commandes exécutées dans le fichier de sortie **slurm-<jobid>.out**
 ```
 cd /home/bench1/TP_job_simple
 sbatch  job.slurm
-sbatch -N 2 –n 4 job.slurm
+cat slurm-*.out
 ```
 
-Consulter la sortie des jobs dans le répertoire de lancement `slurm-<jobid>.out`
+Modifier les valeurs des options `-N 2` et `--ntasks-per-node=3` dans le fichier **job.slurm** puis relancer le job.
+Constater les différences dans les résultats.
+
+Ecraser une ou plusieurs options sbatch en ligne de commande afin de constater l'ordre de prise en compte des options (l'option passée en ligne de commande est prépondérante).
+```
+cd /home/bench1/TP_job_simple
+sbatch  job.slurm
+sbatch -N 2 --ntasks-per-node=4 job.slurm
+```
+
+Consulter la sortie des jobs dans le répertoire de lancement **slurm-<jobid>.out**
 Modifier le fichier job.slurm pour séparer les sorties erreur et standard puis relancer
 ```
 #SBATCH -o slurm-%j.out
 #SBATCH -e slurm-%j.err
 ```
 
-Lancer une série de job puis les interrompres.
+Lancer une série de job puis les interrompres
 ```
 for i in {1..5}; do sbatch job_long.slurm ; done
 squeue
