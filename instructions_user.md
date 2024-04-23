@@ -123,9 +123,9 @@ sinfo -n c1
 ```
 
 <br/><br/>
-<h2>6. Commandes d'allocation et de soumission de jobs</h2>
+<h2>5. Commandes d'allocation et de soumission de jobs</h2>
 
-<h3>6.1 Différence de l'exécution d'une commande avec ou sans srun</h3>
+<h3>5.1 Différence de l'exécution d'une commande avec ou sans srun</h3>
 
 Déplacez-vous dans le répertoire `/home/bench1/TP_job_simple`. Consulter le contenu et soumettre le script **job.slurm**.
 Observer le résultat des commandes exécutées dans le fichier de sortie **slurm-SLURM_JOBID.out**
@@ -138,7 +138,7 @@ cat slurm-*.out
 Modifier les valeurs des options par `-N 2` et `--ntasks-per-node=3` dans le fichier **job.slurm** puis relancer le job.
 Constater les différences dans les résultats.
 
-<h3>6.2 Prépondérance des options </h3>
+<h3>5.2 Prépondérance des options </h3>
 
 Ecraser une ou plusieurs options sbatch en ligne de commande afin de constater l'ordre de prise en compte des options (l'option passée en ligne de commande est prépondérante).
 ```
@@ -147,7 +147,7 @@ sbatch  job.slurm
 sbatch -N 2 --ntasks-per-node=4 job.slurm
 ```
 
-<h3>6.3 Redirection stdout et stderr </h3>
+<h3>5.3 Redirection stdout et stderr </h3>
 
 Modifier le fichier job.slurm pour séparer les sorties erreur et standard dans deux fichiers distincts puis relancer
 ```
@@ -155,7 +155,7 @@ Modifier le fichier job.slurm pour séparer les sorties erreur et standard dans 
 #SBATCH -e slurm-%j.err
 ```
 
-<h3>6.4 Interrompre des jobs </h3>
+<h3>5.4 Interrompre des jobs </h3>
 
 Lancer une série de job puis les interrompres
 ```
@@ -167,7 +167,7 @@ scancel -u bench1 -t R --name=test                 # interrompre les jobs de l'u
 squeue
 ```
 
-<h3>6.5 Gestion de l'environnement </h3>
+<h3>5.5 Gestion de l'environnement </h3>
 
 Exporter une variable dans votre environnement et évaluer le comportement avec l'utilisation de l'option `--export`
 ```
@@ -178,7 +178,7 @@ srun --partition=short --export=NONE /bin/env | grep DAKAR
 srun --partition=short --export=DAKAR=2 /bin/env | grep DAKAR
 ```
 
-<h3>6.6 Distribution des processus (tasks) </h3>
+<h3>5.6 Distribution des processus (tasks) </h3>
 
 Remplacer dans le script **job.slurm** la ligne `srun hostname` par celle-ci
 ```
@@ -191,9 +191,9 @@ srun --label --distribution=cyclic hostname | sort
 ```
 
 <br/><br/>
-<h2>7. Comprendre la configuration du cluster et les limitations posées</h2>
+<h2>6. Comprendre la configuration du cluster et les limitations posées</h2>
 
-<h3>7.1 Limite des partitions </h3>
+<h3>6.1 Limite des partitions </h3>
 
 Soumettre quelques commandes simples avec srun depuis le nœud de login avec l’utilisateur bench1
 ```
@@ -204,7 +204,7 @@ squeue
 ```
 Pourquoi cette dernière commande ne passe pas ? (voir la colomne NODELIST(REASON) de `squeue`)
 
-<h3>7.2 Configurations des accounts slurm </h3>
+<h3>6.2 Configurations des accounts slurm </h3>
 
 Consulter la configuration des comptes utilisateurs
 ```
@@ -212,7 +212,7 @@ sacctmgr  show assoc
 sacctmgr  show assoc where user=bench1
 ```
 
-<h3>7.3 Configurations des QOS </h3>
+<h3>6.3 Configurations des QOS </h3>
 
 Maitenant, consulter les configurations des QOS (Quality Of Service). Observer les différentes limitations positionnées. Consulter le manpage si necessaire `man sacctmgr`
 ```
@@ -225,7 +225,7 @@ sbatch -A eqb --qos=padawan -N 1 -n 1 --wrap="hostname ; sleep 1m"
 squeue_                                                               # colomne PARTITION, USER, ACCOUNT, QOS ...
 ```
 
-<h3>7.4 Limite des QOS </h3>
+<h3>6.4 Limite des QOS </h3>
 
 Soumettre une série de job
 ```
@@ -237,7 +237,7 @@ done
 Pourquoi le message d’erreur QOSMaxSubmitJobPerUserLimit après quelques soumissions ?
 Utiliser `scancel SLURM_JOBID` si besoin.
 
-<h3>7.4 Tests accounts / QOS </h3>
+<h3>6.4 Tests accounts / QOS </h3>
 
 Tester différents paramétrages :
 ```
@@ -248,7 +248,7 @@ srun -A chef --qos=normal -N 3 -n 3 -p exclusive --cpus-per-task=1 hostname
 ```
 
 <br/><br/>
-<h2>8. Accounting utilisateur</h2>
+<h2>7. Accounting utilisateur</h2>
 
 Vérifier l’accounting slurm des 5 derniers jobs
 ```
@@ -281,7 +281,7 @@ sacct_ -A eqb -S 2024-04-24
 ```
 
 <br/><br/>
-<h2>9. Utilisation d'un répertoire temporaire</h2>
+<h2>8. Utilisation d'un répertoire temporaire</h2>
 
 Il s'agit d'un cas test utilisant un répertoire créé temporairement par un script de prolog slurm ajouté par l'administrateur.
 Ce répertoire est supprimé à la fin du job par un script epilog.
@@ -293,7 +293,7 @@ sbatch job.slurm
 Analyser le fichier de sortie.
 
 <br/><br/>
-<h2>10. Utilisation de la fonctionnalité de job array</h2>
+<h2>9. Utilisation de la fonctionnalité de job array</h2>
 
 Un "job array" dans SLURM permet d'exécuter de multiples tâches similaires avec une seule commande, simplifiant ainsi la gestion des travaux par lot.
 
@@ -304,7 +304,7 @@ sbatch job.slurm
 Analyser les fichiers de sortie.
 ```
 <br/><br/>
-<h2>11. Utilisation de la fonctionnalité de job dependency</h2>
+<h2>10. Utilisation de la fonctionnalité de job dependency</h2>
 
 La fonctionnalité de dépendance de tâches dans SLURM permet de spécifier des relations entre les travaux, déterminant ainsi l'ordre d'exécution en fonction de l'état des travaux précédents.
 
@@ -316,9 +316,9 @@ squeue_
 ```
 
 <br/><br/>
-<h2>12. Tests additionnels MPI - hello world & NPB</h2>
+<h2>11. Tests additionnels MPI - hello world & NPB</h2>
 
-<h3>12.1 MPI hello world</h3>
+<h3>11.1 MPI hello world</h3>
 
 Placez-vous dans le répertoire `/home/bench1/TP_hello_world_mpi`. Compiler et lancer le job
 ```
@@ -328,7 +328,7 @@ sbatch job.slurm
 Faire varier les paramètres (nombre de noeuds, tasks …)
 
 <br/><br/>
-<h3>12.2 NPB benchmark</h3>
+<h3>11.2 NPB benchmark</h3>
 
 Placez-vous dans le répertoire `/home/bench1/TP_NPB3.3-MPI`. Compiler le noyau CFD BT (Block Tri-diagonal solver). Il s’agit d’un benchmark utilisant MPI.
 Une fois compilé, placez-vous dans le répertoire `/home/bench1/TP_NPB3.3-MPI/run` et lancer le job
