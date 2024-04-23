@@ -29,7 +29,7 @@ Ctrl+b then d                      # se détacher de la session tmux
 <br/><br/>
 <h2>2. Administration du cluster slurm</h2>
 
-Le TP est hébergé sur une Machine Virtuelle (VM) chez le fournisseur OVH et est accessible par ssh avec le login almalinux. Le mot de passe vous sera communiqué en séance. Exemple de connexion : 
+Le TP est hébergé sur une Machine Virtuelle (VM) chez le fournisseur OVH et est accessible par ssh avec le login <br>almalinux</br>. Le mot de passe vous sera communiqué en séance. Exemple de connexion : 
 ```
 ssh almalinux@141.94.106.28 
 ```
