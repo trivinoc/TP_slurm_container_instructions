@@ -29,19 +29,19 @@ Ctrl+b then d                      # se détacher de la session tmux
 <br/><br/>
 <h2>2. Administration du cluster slurm</h2>
 
-La VM contenant les TP est hébergée chez le fournisseur OVH et est accessible par ssh avec le login almalinux. Le mot de passe vous sera communiqué en séance. Exemple de connexion : 
+Le TP est hébergé sur une Machine Virtuelle (VM) chez le fournisseur OVH et est accessible par ssh avec le login almalinux. Le mot de passe vous sera communiqué en séance. Exemple de connexion : 
 ```
 ssh almalinux@141.94.106.28 
 ```
-Le cluster slurm fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire `/home/almalinux/TP_slurm_utilisateur` de votre machine virtuelle admin-X, et utiliser l’un des alias :
+Le cluster slurm est accessible depuis le VM et fonctionne sur la base de conteneurs podman. Pour opérer le cluster, positionnez-vous dans le répertoire `/home/almalinux/TP_slurm_utilisateur` de votre machine virtuelle admin-X, et utiliser l’un des alias :
 ```
-UP          # démarrage
-DOWN        # arrêt
-RESTART     # redémarrage
+UP          # démarrage du cluster slurm 
+DOWN        # arrêt du cluster slurm
+RESTART     # redémarrage du cluster slurm
 STATE       # statut du cluster slurm
 ```
 
-Lorsque le cluster est démarré, STATE doit vous retourner :
+Lorsque le cluster est démarré, la commande STATE doit vous retourner les informations suivantes :
 ```
 [almalinux@admin-X TP_slurm_utilisateur]$ STATE
 CONTAINER ID  IMAGE                             COMMAND     CREATED         STATUS         PORTS       NAMES
