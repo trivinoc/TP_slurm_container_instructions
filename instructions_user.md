@@ -126,7 +126,7 @@ sinfo -n c1
 <h2>6. Commandes d'allocation et de soumission de jobs</h2>
 
 Déplacez-vous dans le répertoire `/home/bench1/TP_job_simple`. Consulter le contenu et soumettre le script **job.slurm**.
-Observer le résultat des commandes exécutées dans le fichier de sortie **slurm-<jobid>.out**
+Observer le résultat des commandes exécutées dans le fichier de sortie **slurm-SLURM_JOBID.out**
 ```
 cd /home/bench1/TP_job_simple
 sbatch  job.slurm
@@ -143,7 +143,7 @@ sbatch  job.slurm
 sbatch -N 2 --ntasks-per-node=4 job.slurm
 ```
 
-Consulter la sortie des jobs dans le répertoire de lancement **slurm-<jobid>.out**
+Consulter la sortie des jobs dans le répertoire de lancement **slurm-SLURM_JOBID.out**
 Modifier le fichier job.slurm pour séparer les sorties erreur et standard puis relancer
 ```
 #SBATCH -o slurm-%j.out
@@ -205,7 +205,7 @@ do
 done
 ```
 Pourquoi le message d’erreur QOSMaxSubmitJobPerUserLimit après quelques soumissions ?
-Utiliser `scancel <jobid>` si besoin.
+Utiliser `scancel SLURM_JOBID` si besoin.
 
 Tester différents paramétrages :
 ```
