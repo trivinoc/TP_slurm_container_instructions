@@ -448,6 +448,15 @@ Et pour une sortie plus verbeuse (debug) :
 <br/><br/>
 <h2>11. Activer l'utilisation des scripts epilog/prolog</h2>
 
+Pour réaliser ce TP il faut éditer et modifier les fichiers prolog et epilog  qui sont définis dans la configuration Slurm
+```
+egrep -i "prolog|epilog" /etc/slurm/slurm.conf
+```
+Vous pouvez consulter la liste des variables Slurm disponibles dans le prolog/epilog :
+```
+man slurm.conf        # section "PROLOG AND EPILOG SCRIPTS"
+```
+
 Ajouter un script de prologue afin de
  - créer un répertoire temporaire pour chaque job dans l’espace de travail partagé /workdir : `/workdir/$SLURM_JOB_USER.$SLURM_JOB_ID`
  - positionner les droits d’accès et owner du répertoire créé
