@@ -164,7 +164,7 @@ Modifier le fichier job.slurm pour séparer les sorties erreur et standard puis 
 #SBATCH -e slurm-%j.err
 ```
 
-Lancer une série de job puis les interrompres
+Lancer une série de job puis les interrompres. Executer ligne par ligne en prenant le temps d'observer l'effet des commandes.
 ```
 for i in {1..5}; do sbatch job_long.slurm ; done
 squeue
