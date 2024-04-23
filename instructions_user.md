@@ -125,6 +125,8 @@ sinfo -n c1
 <br/><br/>
 <h2>6. Commandes d'allocation et de soumission de jobs</h2>
 
+<h3>6.1 Différence de l'exécution d'une commande avec ou sans srun</h3>
+
 Déplacez-vous dans le répertoire `/home/bench1/TP_job_simple`. Consulter le contenu et soumettre le script **job.slurm**.
 Observer le résultat des commandes exécutées dans le fichier de sortie **slurm-SLURM_JOBID.out**
 ```
@@ -136,6 +138,8 @@ cat slurm-*.out
 Modifier les valeurs des options par `-N 2` et `--ntasks-per-node=3` dans le fichier **job.slurm** puis relancer le job.
 Constater les différences dans les résultats.
 
+<h3>6.2 Prépondérance des options </h3>
+
 Ecraser une ou plusieurs options sbatch en ligne de commande afin de constater l'ordre de prise en compte des options (l'option passée en ligne de commande est prépondérante).
 ```
 cd /home/bench1/TP_job_simple
@@ -143,12 +147,15 @@ sbatch  job.slurm
 sbatch -N 2 --ntasks-per-node=4 job.slurm
 ```
 
-Consulter la sortie des jobs dans le répertoire de lancement **slurm-SLURM_JOBID.out**
-Modifier le fichier job.slurm pour séparer les sorties erreur et standard puis relancer
+<h3>6.3 Redirection stdout et stderr </h3>
+
+Modifier le fichier job.slurm pour séparer les sorties erreur et standard dans deux fichiers distincts puis relancer
 ```
 #SBATCH -o slurm-%j.out
 #SBATCH -e slurm-%j.err
 ```
+
+<h3>6.4 Interrompre des jobs </h3>
 
 Lancer une série de job puis les interrompres
 ```
@@ -160,6 +167,8 @@ scancel -u bench1 -t R --name=test                 # interrompre les jobs de l'u
 squeue
 ```
 
+<h3>6.5 Gestion de l'environnement </h3>
+
 Exporter une variable dans votre environnement et évaluer le comportement avec l'utilisation de l'option `--export`
 ```
 srun --partition=short /bin/env | grep DAKAR
@@ -168,6 +177,9 @@ srun --partition=short /bin/env | grep DAKAR
 srun --partition=short --export=NONE /bin/env | grep DAKAR
 srun --partition=short --export=DAKAR=2 /bin/env | grep DAKAR
 ```
+
+<h3>6.6 Distribution des processus (tasks) </h3>
+
 Remplacer dans le script **job.slurm** la ligne `srun hostname` par celle-ci
 ```
 srun --label --distribution=block hostname | sort
