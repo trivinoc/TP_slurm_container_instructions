@@ -29,7 +29,7 @@ Ctrl+b then d                      # se détacher de la session tmux
 <br/><br/>
 <h2>2. Administration du cluster slurm</h2>
 
-La VM contenant les TP est hébergée chez le fournisseur OVH et est accessible par ssh avec le login almalinux. Le mot de passe vous sera communiqué en séance. Exemple de connexion : 
+Le TP est hébergé sur une Machine Virtuelle (VM) chez le fournisseur OVH et est accessible par ssh avec le login almalinux. Le mot de passe vous sera communiqué en séance. Exemple de connexion : 
 ```
 ssh almalinux@141.94.106.28 
 ```
@@ -75,7 +75,7 @@ bench1      # utilisateur principal pour le TP
 bench2      # utilisateur facultatif pour des tests additionnels
 ```
 
-Pour vous connecter aux conteneurs, un script connect.sh est disponible dans le répertoire `/home/bench1/TP_slurm_utilisateur` et prend une option obligatoire et une option facultative :
+Pour vous connecter aux conteneurs, un script connect.sh est disponible dans le répertoire `/home/almalinux/TP_slurm_utilisateur` de la VM admin-X et prend une option obligatoire ainsi qu'une option facultative :
 ```
 [almalinux@user-X TP_slurm_utilisateur]$ ./connect.sh 
 Le nom de l'image est obligatoire.
