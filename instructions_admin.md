@@ -401,6 +401,11 @@ Obtenir les jobs qui ont été exécutés sur 2 nœuds au cours du mois d’avri
 sacct_ -X -S 2024-04-01T00:00:01  -E 2024-04-30T23:59:59 --nnodes=2
 ```
 
+Obtenir les jobs exécutés avec l'account eqb à partir du 2024-04-22
+```
+sacct_ -A eqb -S 2024-04-22
+```
+
 <br/><br/>
 <h2>9. Modifier le statut des noeuds dans slurm</h2>
 
