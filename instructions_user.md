@@ -193,7 +193,7 @@ srun --label --distribution=cyclic hostname | sort
 <br/><br/>
 <h2>7. Comprendre la configuration du cluster et les limitations posées</h2>
 
-<h3>6.6 Limite des partitions </h3>
+<h3>7.1 Limite des partitions </h3>
 
 Soumettre quelques commandes simples avec srun depuis le nœud de login avec l’utilisateur bench1
 ```
@@ -204,22 +204,28 @@ squeue
 ```
 Pourquoi cette dernière commande ne passe pas ? (voir la colomne NODELIST(REASON) de `squeue`)
 
+<h3>7.2 Configurations des accounts slurm </h3>
+
 Consulter la configuration des comptes utilisateurs
 ```
 sacctmgr  show assoc
 sacctmgr  show assoc where user=bench1
 ```
 
+<h3>7.3 Configurations des QOS </h3>
+
 Maitenant, consulter les configurations des QOS (Quality Of Service). Observer les différentes limitations positionnées. Consulter le manpage si necessaire `man sacctmgr`
 ```
 sacctmgr show qos
 ```
 
-Soumettre les commandes suivantes et consulter le statut des jobs avec l’alias squeue_
+Soumettre la commande suivante et consulter le statut des jobs avec l’alias squeue_
 ```
 sbatch -A eqb --qos=padawan -N 1 -n 1 --wrap="hostname ; sleep 1m"
-squeue_
+squeue_                                                               # colomne PARTITION, USER, ACCOUNT, QOS ...
 ```
+
+<h3>7.4 Limite des QOS </h3>
 
 Soumettre une série de job
 ```
@@ -230,6 +236,8 @@ done
 ```
 Pourquoi le message d’erreur QOSMaxSubmitJobPerUserLimit après quelques soumissions ?
 Utiliser `scancel SLURM_JOBID` si besoin.
+
+<h3>7.4 Tests accounts / QOS </h3>
 
 Tester différents paramétrages :
 ```
