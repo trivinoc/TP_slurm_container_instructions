@@ -316,7 +316,7 @@ squeue_
 ```
 
 <br/><br/>
-<h2>11. Tests additionnels MPI - hello world & NPB</h2>
+<h2>11. Tests MPI - hello world & NPB</h2>
 
 <h3>11.1 MPI hello world</h3>
 
