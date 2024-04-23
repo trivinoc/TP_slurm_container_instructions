@@ -427,7 +427,7 @@ scontrol  update state=idle node=c[1-2]
 
 Activer nhc dans la configuration slurm
 ```
-grep –i HealthCheck /etc/slurm/slurm.conf
+grep -i healthcheck /etc/slurm/slurm.conf
 ```
 Ajouter quelques règles de contrôle nhc (fichier de configuration `/etc/nhc/nhc.conf`)
 Voir le lien (https://github.com/mej/nhc#installation)
