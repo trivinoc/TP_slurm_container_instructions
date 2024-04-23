@@ -105,6 +105,8 @@ podman exec --interactive --user bench1 --tty login bash
 [bench1@login ~]$
 ```
 
+Pour le déroulement de ce TP, vous pouvez simplement vous connecter au conteneur login avec l'utilisateur bench1.
+
 <br/><br/>
 <h2>4. Configuration du cluster</h2>
 
