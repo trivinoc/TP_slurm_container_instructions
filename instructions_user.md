@@ -150,7 +150,7 @@ squeue_ -j $SLURM_JOBID
 Libérer les ressources allouées par slurm
 > Ctrl+d  OR  exit
 
-Déplacez-vous dans le répertoire `/home/bench1/TP_job_simple` et soumettez le script job.slurm. Ecraser une ou plusieurs options sbatch en ligne de commande afin de constater la préponderance des options.
+Déplacez-vous dans le répertoire `/home/bench1/TP_job_simple` et soumettez le script **job.slurm**. Ecraser une ou plusieurs options sbatch en ligne de commande afin de constater la préponderance des options.
 ```
 cd /home/bench1/TP_job_simple
 sbatch  job.slurm
@@ -162,6 +162,16 @@ Modifier le fichier job.slurm pour séparer les sorties erreur et standard puis 
 ```
 #SBATCH -o slurm-%j.out
 #SBATCH -e slurm-%j.err
+```
+
+Lancer une série de job puis les interrompres
+```
+for i in {1..5}; do sbatch job_long.slurm ; done
+squeue
+scancel -u bench1 -t PD                            # interrompre les jobs de l'utilsiteur bench1 en statut PENDING (PD)
+squeue
+scancel -u bench1 -t R --name=test                 # interrompre les jobs de l'utilsiteur bench1 en statut RUNNING (R) dont le nom est test
+squeue
 ```
 
 Exporter une variable dans votre environnement et évaluer le comportement avec l'utilisation de l'option `--export`
@@ -239,12 +249,17 @@ sacct_ -X -u bench1 -S 2024-04-24
 
 Obtenir les jobs été exécutés sur c[1-2] entre des dates spécifiques
 ```
-sacct_ -X -N c[1-2] -S 2024-04-22T10:30:00  -E 2024-04-22T12:42:00
+sacct_ -X -N c[1-2] -S 2024-04-24T10:30:00  -E 2024-04-24T12:42:00
 ```
 
 Obtenir les jobs qui ont été exécutés sur 2 nœuds au cours du mois d’avril
 ```
 sacct_ -X -S 2024-04-01T00:00:01  -E 2024-04-30T23:59:59 --nnodes=2
+```
+
+Obtenir les jobs exécutés avec l'account eqb à partir du 2024-04-22
+```
+sacct_ -A eqb -S 2024-04-24
 ```
 
 <br/><br/>
@@ -253,7 +268,7 @@ sacct_ -X -S 2024-04-01T00:00:01  -E 2024-04-30T23:59:59 --nnodes=2
 Il s'agit d'un cas test utilisant un répertoire créé temporairement par un script de prolog slurm ajouté par l'administrateur.
 Ce répertoire est supprimé à la fin du job par un script epilog.
 Placez-vous dans le répertoire `/home/bench1/TP_tmpdir`.
-Consulter le fichier et lancer le job.
+Consulter le fichier **job.slurm** et lancer le job.
 ```
 sbatch job.slurm
 ```
