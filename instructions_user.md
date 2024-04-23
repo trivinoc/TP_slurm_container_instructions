@@ -13,7 +13,7 @@ alias sinfo_='\sinfo --format="%100E %12U %19H %6t %N" '
 alias squeue_='\squeue  -o "%.18i %.9P %.8j %.8u %.10a %.10q %.8T %.10M %.12l %.10E %.10A %.8C %.6D %R“’
 ```
 
-Vous avez accès aux manpages dans les conteneurs : `man srun ; man sbatch ; man slurm.conf` etc…
+Vous avez accès aux manpages dans les conteneurs : `man srun ; man sbatch ; man scontrol` etc…
 
 Une fois connecté, privilégier l’utilisation de tmux, plus simple pour naviguer entre plusieurs fenêtre et permet au formateur de visualiser aisément votre fenêtre lorsque vous sollicitez son aide. Quelque commandes tmux : 
 
