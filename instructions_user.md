@@ -41,7 +41,7 @@ RESTART     # redémarrage du cluster slurm
 STATE       # statut du cluster slurm
 ```
 
-Lorsque le cluster est démarré, STATE doit vous retourner :
+Lorsque le cluster est démarré, la commande STATE doit vous retourner les informations suivantes :
 ```
 [almalinux@user-X TP_slurm_utilisateur]$ STATE
 CONTAINER ID  IMAGE                             COMMAND     CREATED         STATUS         PORTS       NAMES
