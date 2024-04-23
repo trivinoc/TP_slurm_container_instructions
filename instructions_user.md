@@ -168,6 +168,15 @@ srun --partition=short /bin/env | grep DAKAR
 srun --partition=short --export=NONE /bin/env | grep DAKAR
 srun --partition=short --export=DAKAR=2 /bin/env | grep DAKAR
 ```
+Remplacer dans le script **job.slurm** la ligne `srun hostname` par celle-ci
+```
+srun --label --distribution=block hostname | sort
+```
+Consulter la documentation `man srun` pour connaitre le rôle des options `--label --distribution=`.
+Changer le mode de distribution et observer la différence dans la sortie
+```
+srun --label --distribution=cyclic hostname | sort
+```
 
 <br/><br/>
 <h2>7. Comprendre la configuration du cluster et les limitations posées</h2>
