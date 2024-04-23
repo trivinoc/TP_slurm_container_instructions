@@ -354,6 +354,7 @@ scontrol  create reservation=pasteur nodes=c3 user=bench1 start=now duration=03:
 Vérifier la reservation
 ```
 sinfo -T
+sinfo                                # noter le statut du noeud réservé
 scontrol show reservation=pasteur
 ```
 
