@@ -202,7 +202,7 @@ srun --nodes=2 --ntasks=2 --time=00:01:00 --partition=short hostname
 srun --nodes=3 --ntasks=3 --time=00:01:00 --partition=short hostname &
 squeue
 ```
-Pourquoi cette dernière commande ne passe pas ? (voir la colomne NODELIST(REASON) de `squeue`)
+Pourquoi cette dernière commande ne passe pas ? (voir la colonne NODELIST(REASON) de `squeue`)
 
 <h3>6.2 Configurations des accounts slurm </h3>
 
